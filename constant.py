@@ -25,6 +25,7 @@ DEFAULT_GAME = {1 : "Colnel Mustard" ,
 
 # Function used to debug output easily
 DEBUG_MODE = True
-def debug(str_to_print):
-    if DEBUG_MODE:
+DEBUG_LEVEL = 0
+def debug(str_to_print, level):
+    if DEBUG_MODE and level > DEBUG_LEVEL:
         print str_to_print
