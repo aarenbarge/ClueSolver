@@ -1,9 +1,0 @@
-Welcome to the clue solver
-
-How many players (including yourself) are playing this game?
-Name of Player 1: How many cards does Mom have? 
-
-Name of Player 2: How many cards does Cam have? 
-
-{'Cam': 2, 'Mom': 3}
-error: wrong number of cards given
