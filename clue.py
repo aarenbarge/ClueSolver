@@ -3,7 +3,7 @@ from constant import *
 from ClueGame import *
 
 def print_welcome_text():
-    print("Welcome to the clue solver")
+    print("\n\nWelcome to the clue solver")
     print("Press control-c to stop at any time\n")
 
 def get_int_stdin(message):
@@ -44,9 +44,10 @@ def get_int_stdin(message):
 
 def get_game_players():
     player_dictionary = {}
-    print("How many players (including yourself) are playing this game?")
-    num_players = get_int_stdin("")
+    num_players = get_int_stdin("How many players (including yourself) are playing this game? ")
+    print("")
     your_cards = get_int_stdin("How many cards do YOU have? ")
+    print("")
     player_dictionary["You"] = your_cards
     i = 1
     while i < num_players:
@@ -61,7 +62,7 @@ def get_game_players():
                     print("Number of cards for a player must be positive, try again")
                 else:
                     found = True
-            print("\n")
+            print("")
             player_dictionary[player_i_name] = player_i_cards
             i += 1
     debug(player_dictionary,1)
