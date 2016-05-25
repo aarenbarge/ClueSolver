@@ -14,7 +14,10 @@ class ClueGame:
             quit() # TODO : Find a better way of throwing these errors
 
         # Setup the game
-        self.players_map = [Player(playername=player_name, cardnum=players_map[player_name]) for player_name in players_map.keys()]
+        self.players_map = {player_name : Player(playername=player_name, cardnum=players_map[player_name], game_type=game_type ) for player_name in players_map.keys()}
+        for card in your_cards:
+            self.players_map["You"].has_card(card)
+        
         print "okay"
 
     def enter_game_loop(self):
