@@ -12,6 +12,7 @@ class Player:
         self.doesnt_have = []
         self.definitely_has = []
         self.could_have = [] # Could have needs to be sorted to work
+        self.one_of = []
         for i in range(1,max_cards+1):
             self.could_have.append(i)
             self.could_have = sorted(self.could_have)
@@ -37,6 +38,7 @@ class Player:
         if num not in self.doesnt_have and self.solved == False:
             self.doesnt_have.append(num)
             self.doesnt_have = sorted(self.doesnt_have)
+            self.could_have.remove(num)
             dels = []
             for pos in self.possibilities:
                 if num in pos:
@@ -52,21 +54,35 @@ class Player:
         if num not in self.definitely_has and self.solved == False:
             self.definitely_has.append(num)
             self.definitely_has = sorted(self.definitely_has)
+            self.could_have.remove(num)
             dels = []
             for pos in self.possibilities:
                 if num not in pos:
                     dels.append(pos)
             for d in dels:
                 self.possibilities.remove(d)
+            for pos in self.possibilities:
+                pos.remove(num)
             self.update_deck()
             return 1
         else:
             return 0
 
+    def has_one_of(self,nums):
+        if len(nums) == 3 and len( [ x for x in nums if x in self.definitely_has ] ) = 0:
+            if sorted(nums) not in self.one_of:
+                self.one_of.append(sorted(nums))
+                dels = []
+                for pos in self.possibilities:
+                    if nums[0] not in pos and nums[1] not in pos and nums[2] not in pos:
+                        dels.append(pos)
+                for d in dels:
+                    self.possibilities.remove(d)
+
     def update_deck(self):
         if len(self.definitely_has) == self.num_cards:
             self.solved = True
-            self.possibilities = [self.definitely_has]
+            self.possibilities = []
         else:
             temp_not_found_list = self.could_have
             in_none = []
