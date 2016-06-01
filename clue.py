@@ -75,17 +75,24 @@ def get_game_option():
 def print_game_option(game_option):
     number_header = "Number"
     item_header = "Item"
-    print("\n\nThe following shows the game options. These can be reprinted any time by using the command \":p\"")
+    card_header = "Card Type"
+    card_suspect_print = "Suspect"
+    card_weapon_print = "Weapon"
+    card_room_print = "Room"
+    card_print_list = {SUSPECT:card_suspect_print,WEAPON:card_weapon_print,ROOM:card_room_print}
+    print("\n\nThe following shows the game options. These can be reprinted any time by using the command \":p\"\n")
     largest_num = len(str(max(game_option.keys())))
     if largest_num < len(number_header):
         largest_num = len(number_header)
-    largest_len = max([len(x) for x in game_option.values()])
+    largest_len = max([len(x[0]) for x in game_option.values()])
     if largest_len < len(item_header):
         largest_len = len(item_header)
-    print(("{:<" + str(largest_num) + "} {:<" + str(largest_len) + "}").format(number_header,item_header))
+    largest_type = max( [ len(card_header) , len(card_print_list[SUSPECT]) , len(card_print_list[WEAPON]) , len(card_print_list[ROOM]) ] )
+
+    print(("{:<" + str(largest_num) + "}   {:<" + str(largest_len) + "}   {:<" + str(largest_type) + "}").format(number_header,item_header,card_header))
     for v in sorted(game_option.keys()):
         label = game_option[v]
-        print(("{:<" + str(largest_num) + "} {:<" + str(largest_len) + "}").format(v, label))
+        print(("{:<" + str(largest_num) + "}   {:<" + str(largest_len) + "}   {:<" + str(largest_type) + "}").format(v, label[0], card_print_list[label[1]]))
     print("\n\n")
 
 def get_your_cards(num_cards, max_num):
